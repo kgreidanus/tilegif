@@ -213,21 +213,26 @@
       "P" : prev_gif,
       "H" : horiz,
       "V" : verti,
-      "+" : plus,
-      "-" : minus,
       "F" : full,
       "R" : reset,
       "%" : function() { dx /= 1.5; drawxy(); }, // left arrow
       "'" : function() { dx *= 1.5; drawxy(); }, // right arrow
       "(" : function() { dy *= 1.5; drawxy(); }, // up arrow
       "&" : function() { dy /= 1.5; drawxy(); }, // down arrow
+      187 : plus,  // This is stupid. (-)
+      189 : minus, // This is stupid. (=)
     };
 
     function keystroke(e){
+      // High ascii is being all shitty so this tries to look up codes if it can't find the character.
       keyChar = String.fromCharCode(e.keyCode);
       if ( key_function_mappings.hasOwnProperty(keyChar) ){
         key_function_mappings[keyChar]();
+      } else if (key_function_mappings.hasOwnProperty(e.keyCode)) {
+        key_function_mappings[e.keyCode]();
       }
+
+        console.log(keyChar, e.keyCode);
     }
 
     function mousemove(e){
