@@ -136,15 +136,21 @@
     function next_gif() {
       if (gif_index < gif_index_max){
         gif_index++;
-        setListGif();
+      } else {
+        gif_index = gif_index_min;
       }
+
+      setListGif();
     }
 
     function prev_gif() {
       if (gif_index > gif_index_min){
         gif_index--;
-        setListGif();
+      } else {
+        gif_index = gif_index_max;
       }
+
+      setListGif();
     }
 
     function nozoom() {
