@@ -33,7 +33,7 @@
     // every dt ms translate the backgrounds x by dx and y by dy.
     var dx = DEFAULT_DX; 
     var dy = DEFAULT_DY;
-    var dt = 30; 
+    var dt = 20; 
 
     var container;
     var rawr;
@@ -147,7 +147,7 @@
       }
     }
 
-    function reset() {
+    function nozoom() {
       rawr.style.backgroundSize = "";
 
       tracking = false;
@@ -190,7 +190,6 @@
           }
         }, dt);
       }
-
     }
 
     function stopmovingit() {
@@ -214,7 +213,7 @@
       "H" : horiz,
       "V" : verti,
       "F" : full,
-      "R" : reset,
+      "0" : nozoom,
       "%" : function() { dx /= 1.5; drawxy(); }, // left arrow
       "'" : function() { dx *= 1.5; drawxy(); }, // right arrow
       "(" : function() { dy *= 1.5; drawxy(); }, // up arrow
@@ -231,8 +230,6 @@
       } else if (key_function_mappings.hasOwnProperty(e.keyCode)) {
         key_function_mappings[e.keyCode]();
       }
-
-        console.log(keyChar, e.keyCode);
     }
 
     function mousemove(e){
@@ -262,7 +259,7 @@
       <br>
       <button id="minus" onclick="minus()">Zoom out (-)</button>
       <button id="plus" onclick="plus()">Zoom in (+)</button>
-      <button id="reset" onclick="reset()">Reset (R)</button>
+      <button id="nozoom" onclick="nozoom()">No Zoom (0)</button>
       <br>
       <button id="horiz" onclick="horiz()">Horz (H)</button>
       <button id="verti" onclick="verti()">Vert (V)</button>
