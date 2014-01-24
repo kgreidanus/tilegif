@@ -57,6 +57,7 @@
       "http://24.media.tumblr.com/tumblr_ma28naYTFd1qfjvexo1_500.gif",
       "http://24.media.tumblr.com/tumblr_m6q28aZ30c1qfjvexo1_500.gif",
       "http://31.media.tumblr.com/tumblr_m631bmEnX51qfjvexo1_500.gif",
+      "http://25.media.tumblr.com/tumblr_m6eu89zSRs1rpmo4ho1_500.gif", //http://challenger23.com/post/50172533016/higher-higher-hard-to-believe-its-been-a
     ];
 
     var gif_index_min = 0;
@@ -229,6 +230,9 @@
     };
 
     function keystroke(e){
+      if (document.activeElement == document.getElementById("area")){
+        return;
+      }
       // High ascii is being all shitty so this tries to look up codes if it can't find the character.
       keyChar = String.fromCharCode(e.keyCode);
       if ( key_function_mappings.hasOwnProperty(keyChar) ){
