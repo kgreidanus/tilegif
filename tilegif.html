@@ -11,8 +11,20 @@
       display: none;
     }
 
+    body, html {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+    }
+
     .hover{
       display: inline;
+    }
+
+    .full{
+      width: 100%;
+      height: 100%;
+      margin : 0;
     }
   </style>
   
@@ -254,31 +266,42 @@
 </head>
 
 <body 
-  id="rawr" 
-  onload="init();" 
-  style="background-image: url('http://upload.wikimedia.org/wikipedia/commons/4/42/Loading.gif'); background-color: black"
+  onload="init();"
   onkeydown=keystroke(event)
-  onmousemove=mousemove(event)
->
-  <div id="container">
-    <div class="hidden" id="controls">
-      <textarea id="area" onchange="setManualGif()"></textarea>
-      <br>
-      <button id="next" onclick="next_gif()">Next gif (N)</button>
-      <button id="prev" onclick="prev_gif()">Previous gif (P)</button>
-      <br>
-      <button id="minus" onclick="minus()">Zoom out (-)</button>
-      <button id="plus" onclick="plus()">Zoom in (+)</button>
-      <button id="nozoom" onclick="nozoom()">No Zoom (0)</button>
-      <br>
-      <button id="horiz" onclick="horiz()">Horz (H)</button>
-      <button id="verti" onclick="verti()">Vert (V)</button>
-      <button id="full" onclick="full()">Full (F)</button>
-      <br>
-      <button id="moveit" onclick="moveit()">Move It (M)</button>
-      <button id="stopit" onclick="stopmovingit()">Stop it (S)</button>
-      <br>
-      <button id="trackit" onclick="trackit()">Toggle Mouse Tracking (T)</button>
+  onmousemove=mousemove(event)>
+  <div
+  class="full"
+  id="rawr" 
+  style="background-image: url('http://upload.wikimedia.org/wikipedia/commons/4/42/Loading.gif'); background-color: black"
+ >
+   <div
+  class="full"
+  id="overlay" 
+  style="background-image: url('http://25.media.tumblr.com/95c5ad5b6c6a3c0333a9e9ff00276488/tumblr_muz1lvG6uQ1s5jjtzo1_500.gif');
+  background-size: 100% 100%;
+  "
+ >
+ 
+    <div id="container">
+      <div class="hidden" id="controls">
+        <textarea id="area" onchange="setManualGif()" onTextEntered="setManualGif()"></textarea>
+        <br>
+        <button id="next" onclick="next_gif()">Next gif (N)</button>
+        <button id="prev" onclick="prev_gif()">Previous gif (P)</button>
+        <br>
+        <button id="minus" onclick="minus()">Zoom out (-)</button>
+        <button id="plus" onclick="plus()">Zoom in (+)</button>
+        <button id="nozoom" onclick="nozoom()">No Zoom (0)</button>
+        <br>
+        <button id="horiz" onclick="horiz()">Horz (H)</button>
+        <button id="verti" onclick="verti()">Vert (V)</button>
+        <button id="full" onclick="full()">Full (F)</button>
+        <br>
+        <button id="moveit" onclick="moveit()">Move It (M)</button>
+        <button id="stopit" onclick="stopmovingit()">Stop it (S)</button>
+        <br>
+        <button id="trackit" onclick="trackit()">Toggle Mouse Tracking (T)</button>
+      </div>
     </div>
   </div>
 </body>
