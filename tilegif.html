@@ -1,6 +1,9 @@
 <html>
 
 <head>
+  <title>
+    !! PRESS C !!
+  </title>
   <style>
     #container{
       min-height: 50%;
@@ -285,6 +288,10 @@
       toggle_visibility("overlay");
     }
 
+    function togglecontrols() {
+      toggle_visibility("controls")
+    }
+
     function stopmovingit() {
       clearInterval(translate_interval);
       moving = false;
@@ -323,6 +330,7 @@
       "F" : full,
       "0" : nozoom,
       "O" : toggleoverlay,
+      "C" : togglecontrols,
       "%" : function() { dx /= 1.5; drawxy(); }, // left arrow
       "'" : function() { dx *= 1.5; drawxy(); }, // right arrow
       "(" : function() { dy *= 1.5; drawxy(); }, // up arrow
@@ -372,9 +380,9 @@
   style="background-image: url('http://24.media.tumblr.com/f2c3cb58e5df9b083bb4db24bf7f065a/tumblr_mney5aJkmu1s5jjtzo1_r1_500.gif');
   background-size: 100% 100%;
   "
- >
+ ></div>
  
-    <div id="container">
+    <div id="container" style="z-index: 100">
       <div class="hidden" id="controls">
         <textarea id="area" onchange="setManualGif()" onTextEntered="setManualGif()"></textarea>
         <br>
@@ -397,6 +405,8 @@
         <button id="toggleoverlay" onclick="toggleoverlay()">Toggle Overlay (O)</button>
         <button id="Prevoverlay" onclick="Prev_overlay()">Previous Overlay ([)</button> 
         <button id="nextoverlay" onclick="next_overlay()">Next Overlay (])</button>
+        <br>
+        <button id="showhidecontrols" onclick="togglecontrols()">Hide Controls (C)</button>
       </div>
     </div>
   </div>
