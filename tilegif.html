@@ -117,6 +117,16 @@
     ];
 
     var OVERLAY_URLS = [
+      "http://25.media.tumblr.com/799ad51236017382cf9b663a2f0f852a/tumblr_mvmvniLjr51sn8q7mo1_250.png",
+      "http://d2wss9bif9q3el.cloudfront.net/404/365/images/tumblr_m2ik37tAcJ1r5993eo1_400.gif",
+      "http://www.catalystawareness.com/images/template/map_animation.gif",
+      "http://dump.fm/avatars/20130709/1373352198412-dumpfm-fuzzyfresh-animated-fuzzy-spike-orb-sphere-hairy-furry-bounce-pink-small.gif",
+      "http://25.media.tumblr.com/tumblr_m5fd4rzeOD1qk5qnco1_r1_500.gif",
+      "http://24.media.tumblr.com/8e6be68bc57c10348575a8edd4f05b2d/tumblr_mkpbhxploJ1s5jjtzo1_500.png", //http://totallytransparent.tumblr.com/post/47057204377/transparent-yingyang-credit-where-credit-is-due
+      "http://25.media.tumblr.com/89db3d1b7733df1464f53450843c3be4/tumblr_mon44oWVNb1s5jjtzo1_500.png", //http://totallytransparent.tumblr.com/post/53358009684/semi-transparent-quartz-made-by-totally
+      "http://31.media.tumblr.com/475d327bc51ecffb71c72b904c4560a9/tumblr_mlmnylPn6l1s5jjtzo1_500.png", //http://totallytransparent.tumblr.com/post/48564938151/semi-transparent-fading-no-face-spirited-away
+      "http://25.media.tumblr.com/204ed4bdadaf4945e034acdbe1c63bb2/tumblr_miqk9eeQrV1s5jjtzo1_500.png", //http://totallytransparent.tumblr.com/post/43905490329/slight-edit-on-one-made-by-bagou-grill-is-semi
+
       "http://25.media.tumblr.com/b93b52e9f704e89ea5721398ba762fc3/tumblr_mmlorl6uJk1s5jjtzo1_500.png", //http://totallytransparent.tumblr.com/post/73656808043/totallytransparent-transparent-salvador-dalis
       "http://24.media.tumblr.com/3c3ded128ce8179e6338012392de9021/tumblr_mzx1poQmV71s5jjtzo1_500.gif", //http://totallytransparent.tumblr.com/post/74401902373/transparent-kissing-gif-sort-of-semi
       "http://24.media.tumblr.com/e48fe0368f01d20e5b1dcc3b66e6a070/tumblr_mzhum4TSai1s5jjtzo1_500.gif", //http://totallytransparent.tumblr.com/post/73541531280/transparent-eye-gif-iris-matches-colour-of-your
@@ -163,13 +173,23 @@
     }
 
     function setManualGif() {
-      url = document.getElementById("area").value;
+      url = document.getElementById("gifarea").value;
 
       GIF_URLS.push(url);
       gif_index_max = GIF_URLS.length-1;
 
       rawr.style.backgroundImage = "url("+url+")";
       setBackgroundImageFromUrl(rawr, url);
+    }
+
+    function setManualOverlay() {
+      url = document.getElementById("overlayarea").value;
+
+      OVERLAY_URLS.push(url);
+      overlay_index_max = OVERLAY_URLS.length-1;
+
+      overlay.style.backgroundImage = "url("+url+")";
+      setBackgroundImageFromUrl(overlay, url);
     }
 
     function setListGif() {
@@ -356,9 +376,14 @@
     };
 
     function keystroke(e){
-      if (document.activeElement == document.getElementById("area")){
+      if (document.activeElement == document.getElementById("gifarea")){
         return;
       }
+
+      if (document.activeElement == document.getElementById("overlayarea")){
+        return;
+      }
+
       // High ascii is being all shitty so this tries to look up codes if it can't find the character.
       keyChar = String.fromCharCode(e.keyCode);
       if ( key_function_mappings.hasOwnProperty(keyChar) ){
@@ -379,15 +404,14 @@
   </script>
 </head>
 
-<body 
-  onload="init();"
-  onkeydown=keystroke(event)
-  onmousemove=mousemove(event)>
+<body onload="init();" onkeydown=keystroke(event) onmousemove=mousemove(event)>
   <div class="full" id="rawr" ></div>
    <div class="full hidable" id="overlay" ></div>
     <div id="container">
       <div id="controls" class="hidden">
-        <textarea id="area" onchange="setManualGif()" onTextEntered="setManualGif()"></textarea>
+        <textarea id="gifarea" onchange="setManualGif()" onTextEntered="setManualGif()"></textarea>
+        <br>
+        <textarea id="overlayarea" onchange="setManualOverlay()" onTextEntered="setManualOverlay()"></textarea>
         <br>
         <button id="next" onclick="next_gif()">Next gif (N)</button>
         <button id="prev" onclick="prev_gif()">Previous gif (P)</button>
