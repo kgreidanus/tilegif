@@ -6,8 +6,26 @@
   </title>
   <style>
     #container{
-      min-height: 50%;
-      max-width: 50%;
+      height: 50%;
+      width: 33%;
+      left: 0px;
+      top: 0px;
+      z-index: 100;
+      position: absolute;
+    }
+
+    #overlay{
+      background-image: url('http://24.media.tumblr.com/f2c3cb58e5df9b083bb4db24bf7f065a/tumblr_mney5aJkmu1s5jjtzo1_r1_500.gif');
+      z-index: 10;
+      position: absolute;
+      background-size: 100% 100%;
+    }
+
+    #rawr{
+      z-index: 0;
+      position: absolute;
+      background-image: url('http://upload.wikimedia.org/wikipedia/commons/4/42/Loading.gif'); 
+      background-color: black;
     }
 
     .hidden{
@@ -102,7 +120,6 @@
       "http://25.media.tumblr.com/b93b52e9f704e89ea5721398ba762fc3/tumblr_mmlorl6uJk1s5jjtzo1_500.png", //http://totallytransparent.tumblr.com/post/73656808043/totallytransparent-transparent-salvador-dalis
       "http://24.media.tumblr.com/3c3ded128ce8179e6338012392de9021/tumblr_mzx1poQmV71s5jjtzo1_500.gif", //http://totallytransparent.tumblr.com/post/74401902373/transparent-kissing-gif-sort-of-semi
       "http://24.media.tumblr.com/e48fe0368f01d20e5b1dcc3b66e6a070/tumblr_mzhum4TSai1s5jjtzo1_500.gif", //http://totallytransparent.tumblr.com/post/73541531280/transparent-eye-gif-iris-matches-colour-of-your
-      "http://31.media.tumblr.com/c6b4a7e7e8595f35ca5f9f3ed5040913/tumblr_mz5q82frU91s5jjtzo1_500.png", //http://totallytransparent.tumblr.com/post/72809125006/semi-transparent-glass-smash-makes-your-blog-look
       "http://31.media.tumblr.com/dd068196666b46e5a8fd3bd6c9eac3c0/tumblr_mz07y9yFah1s5jjtzo1_1280.png", //http://totallytransparent.tumblr.com/post/72491298811/semi-transparent-ice-cream-rose-matches-colour-of
       "http://24.media.tumblr.com/f2c3cb58e5df9b083bb4db24bf7f065a/tumblr_mney5aJkmu1s5jjtzo1_r1_500.gif", //http://totallytransparent.tumblr.com/post/71767033740/totallytransparent-transparent-fireworks-gif
       "http://25.media.tumblr.com/bd38c3f264f51c1043b6c20d64c20a26/tumblr_mxgcbshJ4H1s5jjtzo1_500.gif", //http://totallytransparent.tumblr.com/post/69294181178/transparent-water-gif-your-blogs-background-is
@@ -136,15 +153,11 @@
       setListGif();
 
       container.onmouseover = function() {
-        
-        var inner = document.getElementById("controls");
-        inner.classList.add("hover");
-        
+        toggle_visibility("controls", "show");
       };
 
       container.onmouseout = function() {
-        var inner = document.getElementById("controls");
-        inner.classList.remove("hover");
+        toggle_visibility("controls", "hide");
       };
 
     }
@@ -308,14 +321,15 @@
   <!--
   //http://blog.movalog.com/a/javascript-toggle-visibility/
   // Grab display from computed style then write it to the element's style
-      function toggle_visibility(id) {
+      function toggle_visibility(id, set_vis) {
          var e = document.getElementById(id);
          var display = window.getComputedStyle(e).display
-         if( display == 'block')
+         if( (display == 'block' && set_vis != "show") || set_vis == "hide" )
             e.style.display = 'none';
          else
             e.style.display = 'block';
       }
+
   //-->
   </script>
   <script>
@@ -369,21 +383,10 @@
   onload="init();"
   onkeydown=keystroke(event)
   onmousemove=mousemove(event)>
-  <div
-  class="full"
-  id="rawr" 
-  style="background-image: url('http://upload.wikimedia.org/wikipedia/commons/4/42/Loading.gif'); background-color: black"
- >
-   <div
-  class="full hidable"
-  id="overlay" 
-  style="background-image: url('http://24.media.tumblr.com/f2c3cb58e5df9b083bb4db24bf7f065a/tumblr_mney5aJkmu1s5jjtzo1_r1_500.gif');
-  background-size: 100% 100%;
-  "
- ></div>
- 
-    <div id="container" style="z-index: 100">
-      <div class="hidden" id="controls">
+  <div class="full" id="rawr" ></div>
+   <div class="full hidable" id="overlay" ></div>
+    <div id="container">
+      <div id="controls" class="hidden">
         <textarea id="area" onchange="setManualGif()" onTextEntered="setManualGif()"></textarea>
         <br>
         <button id="next" onclick="next_gif()">Next gif (N)</button>
@@ -409,6 +412,6 @@
         <button id="showhidecontrols" onclick="togglecontrols()">Hide Controls (C)</button>
       </div>
     </div>
-  </div>
+
 </body>
 </html>
