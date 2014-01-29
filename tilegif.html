@@ -233,10 +233,10 @@
 
       function setManualGif() {
         url = gifarea.value;
+        
+        GIF_URLS.push(url);
         gif_index = gif_index_max;
 
-        GIF_URLS.push(url);
-        
         setListGif();
 
         gifarea.value = "";
@@ -244,10 +244,12 @@
 
       function setManualOverlay() {
         url = overlayarea.value;
+        
+        OVERLAY_URLS.push(url);
         overlay_index = overlay_index_max;
 
-        OVERLAY_URLS.push(url);
         setListOverlay();
+
         overlayarea.value = "";
       }
 
