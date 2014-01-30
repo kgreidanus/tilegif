@@ -141,6 +141,7 @@
         "https://31.media.tumblr.com/7626f1d9d83fff421552b59c479e8b29/tumblr_n04vrep56i1qep11bo1_250.gif", // haha i dont even know
         "https://24.media.tumblr.com/0013e762e69b4ee4ae637f46a6c726e5/tumblr_mjf8l3rJXy1qatmzjo4_500.gif", 
         "https://31.media.tumblr.com/8fab4b256c70a87d7f7c222614c67cf2/tumblr_my6kjn3LLI1s5jjtzo1_500.png", //totally transparent gif
+        "https://24.media.tumblr.com/d22469d5bc1765ac139e6c5052fc3255/tumblr_mttju1EvbP1rafo29o1_400.gif",
 
       ];
 
@@ -235,7 +236,7 @@
         url = gifarea.value;
         
         GIF_URLS.push(url);
-        gif_index = gif_index_max;
+        gif_index = GIF_URLS.length-1;
 
         setListGif();
 
@@ -246,7 +247,7 @@
         url = overlayarea.value;
         
         OVERLAY_URLS.push(url);
-        overlay_index = overlay_index_max;
+        overlay_index = OVERLAY_URLS.length-1;
 
         setListOverlay();
 
