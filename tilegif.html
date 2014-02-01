@@ -1,18 +1,55 @@
 <html>
 
 <head>
+  <title>
+    !! PRESS C !!
+  </title>
   <style>
     #container{
-      min-height: 50%;
-      max-width: 50%;
+      height: 50%;
+      width: 33%;
+      left: 0px;
+      top: 0px;
+      z-index: 100;
+      position: absolute;
+    }
+
+    #overlay{
+      background-image: url('http://24.media.tumblr.com/f2c3cb58e5df9b083bb4db24bf7f065a/tumblr_mney5aJkmu1s5jjtzo1_r1_500.gif');
+      z-index: 10;
+      position: absolute;
+      background-size: 100% 100%;
+    }
+
+    #rawr{
+      z-index: 0;
+      position: absolute;
+      background-image: url('http://upload.wikimedia.org/wikipedia/commons/4/42/Loading.gif'); 
+      background-color: black;
     }
 
     .hidden{
       display: none;
     }
 
+    body, html{
+      height: 100%;
+      width: 100%;
+      margin: 0;
+    }
+
+    .hidable {
+      display: none;
+    }
+
     .hover{
       display: inline;
+    }
+
+    .full{
+      width: 100%;
+      height: 100%;
+      margin : 0;
     }
   </style>
   
@@ -37,9 +74,13 @@
 
     var container;
     var rawr;
+    var overlay;
+
     var tracking;
 
     var gif_index = 0;
+    var overlay_index = 0;
+
     var GIF_URLS = [
       "http://31.media.tumblr.com/37b83fc62c74feca10eabdd949db2e09/tumblr_mzq5d8uiFD1six59bo1_400.gif",
       "http://25.media.tumblr.com/761e32af86895cf7c1be483932bc5a71/tumblr_mvrw6iuSHS1rilp8po1_500.gif",
@@ -58,10 +99,54 @@
       "http://24.media.tumblr.com/tumblr_m6q28aZ30c1qfjvexo1_500.gif",
       "http://31.media.tumblr.com/tumblr_m631bmEnX51qfjvexo1_500.gif",
       "http://25.media.tumblr.com/tumblr_m6eu89zSRs1rpmo4ho1_500.gif", //http://challenger23.com/post/50172533016/higher-higher-hard-to-believe-its-been-a
+      "http://24.media.tumblr.com/tumblr_m8jk6nInJO1qzt4vjo1_r1_500.gif", //http://dvdp.tumblr.com/post/29122608238/120810
+      "http://24.media.tumblr.com/e5c932db66ed421736780dfebbe35526/tumblr_mkpeswN0251qzt4vjo1_500.gif", //http://dvdp.tumblr.com/post/47063729566/130404-love-you-all
+      "http://25.media.tumblr.com/05f77e427b084ca9c12e7988820db96f/tumblr_mjtrxqSygR1qzt4vjo1_500.gif", //http://dvdp.tumblr.com/post/45622098355/130317-so-i-had-unbelievable-strong-feelings-for
+      "http://25.media.tumblr.com/aefa86d4b95da7575f624c2cf8a6c027/tumblr_mjehov9lbc1qzt4vjo1_500.gif", //http://dvdp.tumblr.com/post/44944654275/130309-few-words-0-i-lied-in-my-last-post
+      "http://25.media.tumblr.com/tumblr_m80rq1nhi01qzt4vjo1_500.gif", //http://dvdp.tumblr.com/post/28403235902/120731
+      "http://24.media.tumblr.com/tumblr_m0fn8ixvDc1qzt4vjo1_r2_500.gif", //http://dvdp.tumblr.com/post/18809736612/120305-xxl
+      "http://25.media.tumblr.com/tumblr_lxuxdsMuKY1qzt4vjo1_r2_500.gif", //http://dvdp.tumblr.com/post/15902554993/120115
+      "http://25.media.tumblr.com/tumblr_ltljrwYaPG1qzt4vjo1_500.gif", //http://dvdp.tumblr.com/post/11888038945/111025
+      "http://31.media.tumblr.com/tumblr_lfiabnq4ec1qzt4vjo1_r1_500.gif", //http://dvdp.tumblr.com/post/2903000638/110124
+      "http://25.media.tumblr.com/tumblr_lc8pjaHh731qzt4vjo1_500.gif", //http://dvdp.tumblr.com/post/1637287002
+      "http://25.media.tumblr.com/tumblr_l99apcLI5U1qzt4vjo1_r1_500.gif", //http://dvdp.tumblr.com/post/1179162945
+      "http://24.media.tumblr.com/tumblr_l6livgwj781qzt4vjo1_r1_500.gif", //http://dvdp.tumblr.com/post/899742508
+      "http://25.media.tumblr.com/tumblr_kt0pplLYZc1qzt4vjo1_500.gif", //http://dvdp.tumblr.com/post/241884041
+      "http://24.media.tumblr.com/dd6144cd30249268266d4b69398df2e3/tumblr_n02sq2Tfre1r2geqjo1_500.gif", //http://beesandbombs.tumblr.com/post/74749253172/this-is-a-gif-i-posted-a-few-weeks-ago-if-you
+
     ];
+
+    var OVERLAY_URLS = [
+      "http://25.media.tumblr.com/799ad51236017382cf9b663a2f0f852a/tumblr_mvmvniLjr51sn8q7mo1_250.png",
+      "http://d2wss9bif9q3el.cloudfront.net/404/365/images/tumblr_m2ik37tAcJ1r5993eo1_400.gif",
+      "http://www.catalystawareness.com/images/template/map_animation.gif",
+      "http://dump.fm/avatars/20130709/1373352198412-dumpfm-fuzzyfresh-animated-fuzzy-spike-orb-sphere-hairy-furry-bounce-pink-small.gif",
+      "http://25.media.tumblr.com/tumblr_m5fd4rzeOD1qk5qnco1_r1_500.gif",
+      "http://24.media.tumblr.com/8e6be68bc57c10348575a8edd4f05b2d/tumblr_mkpbhxploJ1s5jjtzo1_500.png", //http://totallytransparent.tumblr.com/post/47057204377/transparent-yingyang-credit-where-credit-is-due
+      "http://25.media.tumblr.com/89db3d1b7733df1464f53450843c3be4/tumblr_mon44oWVNb1s5jjtzo1_500.png", //http://totallytransparent.tumblr.com/post/53358009684/semi-transparent-quartz-made-by-totally
+      "http://31.media.tumblr.com/475d327bc51ecffb71c72b904c4560a9/tumblr_mlmnylPn6l1s5jjtzo1_500.png", //http://totallytransparent.tumblr.com/post/48564938151/semi-transparent-fading-no-face-spirited-away
+      "http://25.media.tumblr.com/204ed4bdadaf4945e034acdbe1c63bb2/tumblr_miqk9eeQrV1s5jjtzo1_500.png", //http://totallytransparent.tumblr.com/post/43905490329/slight-edit-on-one-made-by-bagou-grill-is-semi
+
+      "http://25.media.tumblr.com/b93b52e9f704e89ea5721398ba762fc3/tumblr_mmlorl6uJk1s5jjtzo1_500.png", //http://totallytransparent.tumblr.com/post/73656808043/totallytransparent-transparent-salvador-dalis
+      "http://24.media.tumblr.com/3c3ded128ce8179e6338012392de9021/tumblr_mzx1poQmV71s5jjtzo1_500.gif", //http://totallytransparent.tumblr.com/post/74401902373/transparent-kissing-gif-sort-of-semi
+      "http://24.media.tumblr.com/e48fe0368f01d20e5b1dcc3b66e6a070/tumblr_mzhum4TSai1s5jjtzo1_500.gif", //http://totallytransparent.tumblr.com/post/73541531280/transparent-eye-gif-iris-matches-colour-of-your
+      "http://31.media.tumblr.com/dd068196666b46e5a8fd3bd6c9eac3c0/tumblr_mz07y9yFah1s5jjtzo1_1280.png", //http://totallytransparent.tumblr.com/post/72491298811/semi-transparent-ice-cream-rose-matches-colour-of
+      "http://24.media.tumblr.com/f2c3cb58e5df9b083bb4db24bf7f065a/tumblr_mney5aJkmu1s5jjtzo1_r1_500.gif", //http://totallytransparent.tumblr.com/post/71767033740/totallytransparent-transparent-fireworks-gif
+      "http://25.media.tumblr.com/bd38c3f264f51c1043b6c20d64c20a26/tumblr_mxgcbshJ4H1s5jjtzo1_500.gif", //http://totallytransparent.tumblr.com/post/69294181178/transparent-water-gif-your-blogs-background-is
+      "http://25.media.tumblr.com/16791f385d1f17007371db57f655a0fb/tumblr_mqnsgg4DG21s5jjtzo1_500.png", //http://totallytransparent.tumblr.com/post/66791599192/totallytransparent-transparent-tiger-wading
+      "http://24.media.tumblr.com/85535e0b10eec06ec3a953735b42ca22/tumblr_mvebyknAzU1s5jjtzo1_500.png", //http://totallytransparent.tumblr.com/post/65475977299/semi-transparent-lips-match-colour-of-your-blog
+      "http://25.media.tumblr.com/98ee332435883155967ec37571a96e89/tumblr_mtygnj0ELN1s5jjtzo1_500.gif", //http://totallytransparent.tumblr.com/post/62742418730/transparent-lipgloss-gif-lipgloss-matches-colour
+      "http://25.media.tumblr.com/d6360c046a650cc74690ae742e1a9c97/tumblr_msvaa9dfPZ1s5jjtzo1_r1_500.gif", //http://totallytransparent.tumblr.com/post/60768502030/transparent-dandelion-gif-dandelion-matches
+      "http://25.media.tumblr.com/888e68096bf9c50a9c1d16335ce54003/tumblr_mstvtvgioJ1s5jjtzo1_1280.png", //http://totallytransparent.tumblr.com/post/60695536443/semi-transparent-hair-matches-colour-of-your
+      "http://31.media.tumblr.com/0dd2c6d14ce9eb15dca0ec7193669a88/tumblr_msd2dkG47M1s5jjtzo1_500.png", //http://totallytransparent.tumblr.com/post/59799200631/semi-transparent-roses-petals-match-colour-of
+      "http://24.media.tumblr.com/e26e2f10a4399fa6402bef117ae6b3e6/tumblr_mpkl8sCbQs1s5jjtzo1_500.gif", //http://totallytransparent.tumblr.com/post/56912764887/totallytransparent-drawn-animated-by-totally
+    ]
 
     var gif_index_min = 0;
     var gif_index_max = GIF_URLS.length-1;
+
+    var overlay_index_min = 0;
+    var overlay_index_max = OVERLAY_URLS.length-1;
 
     var translate_interval;
 
@@ -73,37 +158,50 @@
     function init() {
       container = document.getElementById("container");
       rawr = document.getElementById("rawr");
+      overlay = document.getElementById("overlay");
 
       setListGif();
 
       container.onmouseover = function() {
-        
-        var inner = document.getElementById("controls");
-        inner.classList.add("hover");
-        
+        toggle_visibility("controls", "show");
       };
 
       container.onmouseout = function() {
-        var inner = document.getElementById("controls");
-        inner.classList.remove("hover");
+        toggle_visibility("controls", "hide");
       };
 
     }
 
     function setManualGif() {
-      url = document.getElementById("area").value;
+      url = document.getElementById("gifarea").value;
 
       GIF_URLS.push(url);
+      gif_index_max = GIF_URLS.length-1;
+
       rawr.style.backgroundImage = "url("+url+")";
-      setBackgroundImageFromUrl(url);
+      setBackgroundImageFromUrl(rawr, url);
+    }
+
+    function setManualOverlay() {
+      url = document.getElementById("overlayarea").value;
+
+      OVERLAY_URLS.push(url);
+      overlay_index_max = OVERLAY_URLS.length-1;
+
+      overlay.style.backgroundImage = "url("+url+")";
+      setBackgroundImageFromUrl(overlay, url);
     }
 
     function setListGif() {
-      setBackgroundImageFromUrl(GIF_URLS[gif_index]);
+      setBackgroundImageFromUrl(rawr, GIF_URLS[gif_index]);
     }
 
-    function setBackgroundImageFromUrl(url) {
-      rawr.style.backgroundImage = "url("+url+")";
+    function setListOverlay() {
+      setBackgroundImageFromUrl(overlay, OVERLAY_URLS[overlay_index]);
+    }
+
+    function setBackgroundImageFromUrl(e, url) {
+      e.style.backgroundImage = "url("+url+")";
     }
 
     function minus() {
@@ -154,6 +252,26 @@
       setListGif();
     }
 
+    function next_overlay() {
+      if (overlay_index < overlay_index_max){
+        overlay_index++;
+      } else {
+        overlay_index = overlay_index_min;
+      }
+
+      setListOverlay();
+    }
+
+    function prev_overlay() {
+      if (overlay_index > overlay_index_min){
+        overlay_index--;
+      } else {
+        overlay_index = overlay_index_max;
+      }
+
+      setListOverlay();
+    }
+
     function nozoom() {
       rawr.style.backgroundSize = "";
 
@@ -199,6 +317,14 @@
       }
     }
 
+    function toggleoverlay() {
+      toggle_visibility("overlay");
+    }
+
+    function togglecontrols() {
+      toggle_visibility("controls")
+    }
+
     function stopmovingit() {
       clearInterval(translate_interval);
       moving = false;
@@ -209,6 +335,22 @@
       tracking = !tracking;
     }
 
+  </script>
+
+  <script type="text/javascript">
+  <!--
+  //http://blog.movalog.com/a/javascript-toggle-visibility/
+  // Grab display from computed style then write it to the element's style
+      function toggle_visibility(id, set_vis) {
+         var e = document.getElementById(id);
+         var display = window.getComputedStyle(e).display
+         if( (display == 'block' && set_vis != "show") || set_vis == "hide" )
+            e.style.display = 'none';
+         else
+            e.style.display = 'block';
+      }
+
+  //-->
   </script>
   <script>
     var key_function_mappings = {
@@ -221,18 +363,27 @@
       "V" : verti,
       "F" : full,
       "0" : nozoom,
+      "O" : toggleoverlay,
+      "C" : togglecontrols,
       "%" : function() { dx /= 1.5; drawxy(); }, // left arrow
       "'" : function() { dx *= 1.5; drawxy(); }, // right arrow
       "(" : function() { dy *= 1.5; drawxy(); }, // up arrow
       "&" : function() { dy /= 1.5; drawxy(); }, // down arrow
       187 : plus,  // This is stupid. (-)
       189 : minus, // This is stupid. (=)
+      219 : prev_overlay, // This is stupid. ([)
+      221 : next_overlay, // This is stupid. (])
     };
 
     function keystroke(e){
-      if (document.activeElement == document.getElementById("area")){
+      if (document.activeElement == document.getElementById("gifarea")){
         return;
       }
+
+      if (document.activeElement == document.getElementById("overlayarea")){
+        return;
+      }
+
       // High ascii is being all shitty so this tries to look up codes if it can't find the character.
       keyChar = String.fromCharCode(e.keyCode);
       if ( key_function_mappings.hasOwnProperty(keyChar) ){
@@ -253,33 +404,38 @@
   </script>
 </head>
 
-<body 
-  id="rawr" 
-  onload="init();" 
-  style="background-image: url('http://upload.wikimedia.org/wikipedia/commons/4/42/Loading.gif'); background-color: black"
-  onkeydown=keystroke(event)
-  onmousemove=mousemove(event)
->
-  <div id="container">
-    <div class="hidden" id="controls">
-      <textarea id="area" onchange="setManualGif()"></textarea>
-      <br>
-      <button id="next" onclick="next_gif()">Next gif (N)</button>
-      <button id="prev" onclick="prev_gif()">Previous gif (P)</button>
-      <br>
-      <button id="minus" onclick="minus()">Zoom out (-)</button>
-      <button id="plus" onclick="plus()">Zoom in (+)</button>
-      <button id="nozoom" onclick="nozoom()">No Zoom (0)</button>
-      <br>
-      <button id="horiz" onclick="horiz()">Horz (H)</button>
-      <button id="verti" onclick="verti()">Vert (V)</button>
-      <button id="full" onclick="full()">Full (F)</button>
-      <br>
-      <button id="moveit" onclick="moveit()">Move It (M)</button>
-      <button id="stopit" onclick="stopmovingit()">Stop it (S)</button>
-      <br>
-      <button id="trackit" onclick="trackit()">Toggle Mouse Tracking (T)</button>
+<body onload="init();" onkeydown=keystroke(event) onmousemove=mousemove(event)>
+  <div class="full" id="rawr" ></div>
+   <div class="full hidable" id="overlay" ></div>
+    <div id="container">
+      <div id="controls" class="hidden">
+        <textarea id="gifarea" onchange="setManualGif()" onTextEntered="setManualGif()"></textarea>
+        <br>
+        <textarea id="overlayarea" onchange="setManualOverlay()" onTextEntered="setManualOverlay()"></textarea>
+        <br>
+        <button id="next" onclick="next_gif()">Next gif (N)</button>
+        <button id="prev" onclick="prev_gif()">Previous gif (P)</button>
+        <br>
+        <button id="minus" onclick="minus()">Zoom out (-)</button>
+        <button id="plus" onclick="plus()">Zoom in (+)</button>
+        <button id="nozoom" onclick="nozoom()">No Zoom (0)</button>
+        <br>
+        <button id="horiz" onclick="horiz()">Horz (H)</button>
+        <button id="verti" onclick="verti()">Vert (V)</button>
+        <button id="full" onclick="full()">Full (F)</button>
+        <br>
+        <button id="moveit" onclick="moveit()">Move It (M)</button>
+        <button id="stopit" onclick="stopmovingit()">Stop it (S)</button>
+        <br>
+        <button id="trackit" onclick="trackit()">Toggle Mouse Tracking (T)</button>
+        <br>
+        <button id="toggleoverlay" onclick="toggleoverlay()">Toggle Overlay (O)</button>
+        <button id="Prevoverlay" onclick="Prev_overlay()">Previous Overlay ([)</button> 
+        <button id="nextoverlay" onclick="next_overlay()">Next Overlay (])</button>
+        <br>
+        <button id="showhidecontrols" onclick="togglecontrols()">Hide Controls (C)</button>
+      </div>
     </div>
-  </div>
+
 </body>
 </html>
