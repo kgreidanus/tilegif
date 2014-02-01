@@ -57,6 +57,98 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     
+    <script>
+      function Layer(_id, _list){
+        this.e = document.getElementById(_id); //dumb? maybe. idk.
+
+        this.list = _list;
+
+        this.x = 0;
+        thix.y = 0;
+        this.z = getComputedStyle(rawr).zIndex; //ugh, what? why?
+
+        this.dx;
+        this.dy;
+        this.dt;
+
+        this.hpercent;
+        this.vpercent;
+
+        this.setBackgroundURL = function(url) {
+          this.e.style.backgroundImage = "url("+url+")";
+        }
+
+        this.show = function(){
+          toggle_visibility(this.e, "show");
+        }
+
+        this.hide = function(){
+          toggle_visibility(this.e, "hide");
+        }
+      }
+
+      function List(){
+        this.arr;
+        this.index;
+
+        this.max = function() {
+          return this.arr.length-1;
+        }
+
+        this.min = function() {
+          return 0;
+        }
+
+        this.set = function(new_index){
+          // for external setting only, internally should just set this.index;
+          this.index = new_index;
+
+          return this.arr[this.index];
+        }
+
+        this.next = function() { 
+
+          if (this.index < this.min()){
+            this.index--;
+          } else {
+            this.index = this.max();
+          }
+
+          return this.arr[this.index];
+        }
+
+        this.previous = function() { 
+
+          if (this.index < this.max()){
+            this.index++;
+          } else {
+            this.index = this.min();
+          }
+
+          return this.arr[this.index];
+        }
+
+        this.random = function() {
+
+          this.index = Math.floor(Math.random()*(this.max() + 1));
+          return this.arr[this.index];
+        }
+
+        this.add = function(e) {
+          // add element, set index, return element;
+          this.arr.push(e);
+          return this.set(this.max());
+        }
+
+        this.remove = function(i) {
+          this.arr.splice(i, 1);
+          this.index = Math.min(this.index, this.max()); 
+
+          return this.arr[this.index];
+        }
+      }
+    </script>
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
     <script>
@@ -142,6 +234,10 @@
         "https://24.media.tumblr.com/0013e762e69b4ee4ae637f46a6c726e5/tumblr_mjf8l3rJXy1qatmzjo4_500.gif", 
         "https://31.media.tumblr.com/8fab4b256c70a87d7f7c222614c67cf2/tumblr_my6kjn3LLI1s5jjtzo1_500.png", //totally transparent gif
         "https://24.media.tumblr.com/d22469d5bc1765ac139e6c5052fc3255/tumblr_mttju1EvbP1rafo29o1_400.gif",
+        "http://31.media.tumblr.com/705dae9e2f10a48db26355a79bd6541b/tumblr_n05aqthiEW1rk1qp5o1_400.gif", //gnumblr, fucking watermark.
+        "http://24.media.tumblr.com/0b39f419213c7f5b3f2817f0826f0bc0/tumblr_mz07m6doha1rk1qp5o1_500.gif", //gnumblr, fucking watermark.
+        "https://31.media.tumblr.com/74e968585193ae6cac00640f4ff874b0/tumblr_n06sbmaE8l1rioxyio1_500.gif", 
+        "http://i.minus.com/ibwFFM0DfsNhlk.gif", 
 
       ];
 
@@ -342,6 +438,7 @@
         setListOverlay();
       }
 
+      //action
       function nozoom() {
         rawr.style.backgroundSize = "";
 
@@ -360,16 +457,17 @@
         drawxy();
       }
 
+      //action? jesus.
       function drawxy() {
         // This is a bit of a misnomer, nothing is really being "drawn" but it makes sense kind of
         draw(x,y);
       }
-
       function draw(_x,_y) {
           rawr.style.backgroundPositionY = _y+"px";
           rawr.style.backgroundPositionX = _x+"px";      
       }
 
+      //action -- sort of
       function moveit() {
         moving = true;
 
