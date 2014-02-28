@@ -21,6 +21,7 @@
       }
 
       #rawr{
+        -webkit-filter: hue-rotate(50deg);
         z-index: 0;
         position: absolute;
         background-image: url('http://upload.wikimedia.org/wikipedia/commons/4/42/Loading.gif'); 
@@ -50,6 +51,16 @@
         height: 100%;
         margin : 0;
       }
+
+      #full_overlay {
+        -webkit-filter: blur(20px);
+        -moz-filter: blur(20px);
+        -o-filter: blur(20px);
+        -ms-filter: blur(20px);
+        filter: blur(20px);
+        opacity: 0.4;
+    }
+      }
     </style>
 
     <script src="https://code.jquery.com/jquery.js"></script>
@@ -73,6 +84,18 @@
 
         this.hpercent;
         this.vpercent;
+
+        this.next = function(){
+          this.setBackgroundURL(list.next());
+        }
+
+        this.previous = function(){
+          this.setBackgroundURL(list.previous());
+        }
+
+        this.random = function(){
+          this.setBackgroundURL(list.random());
+        }
 
         this.setBackgroundURL = function(url) {
           this.e.style.backgroundImage = "url("+url+")";
@@ -228,17 +251,35 @@
         "http://media.giphy.com/media/iIy2ZdWhYktHy/giphy.gif",
         "http://media0.giphy.com/media/XA5pD2lW6LpYI/giphy.gif",
         "http://media.giphy.com/media/tNXdZLxaH6JlS/giphy.gif",
-        "https://panthema.net/2013/sound-of-sorting/thumb.gif",
+        "http://panthema.net/2013/sound-of-sorting/thumb.gif",
         "http://media.rhizome.org/blog/9076/Rosa-Menkman-.gif",
-        "https://31.media.tumblr.com/7626f1d9d83fff421552b59c479e8b29/tumblr_n04vrep56i1qep11bo1_250.gif", // haha i dont even know
-        "https://24.media.tumblr.com/0013e762e69b4ee4ae637f46a6c726e5/tumblr_mjf8l3rJXy1qatmzjo4_500.gif", 
-        "https://31.media.tumblr.com/8fab4b256c70a87d7f7c222614c67cf2/tumblr_my6kjn3LLI1s5jjtzo1_500.png", //totally transparent gif
-        "https://24.media.tumblr.com/d22469d5bc1765ac139e6c5052fc3255/tumblr_mttju1EvbP1rafo29o1_400.gif",
+        "http://31.media.tumblr.com/7626f1d9d83fff421552b59c479e8b29/tumblr_n04vrep56i1qep11bo1_250.gif", // haha i dont even know
+        "http://24.media.tumblr.com/0013e762e69b4ee4ae637f46a6c726e5/tumblr_mjf8l3rJXy1qatmzjo4_500.gif", 
+        "http://31.media.tumblr.com/8fab4b256c70a87d7f7c222614c67cf2/tumblr_my6kjn3LLI1s5jjtzo1_500.png", //totally transparent gif
+        "http://24.media.tumblr.com/d22469d5bc1765ac139e6c5052fc3255/tumblr_mttju1EvbP1rafo29o1_400.gif",
         "http://31.media.tumblr.com/705dae9e2f10a48db26355a79bd6541b/tumblr_n05aqthiEW1rk1qp5o1_400.gif", //gnumblr, fucking watermark.
         "http://24.media.tumblr.com/0b39f419213c7f5b3f2817f0826f0bc0/tumblr_mz07m6doha1rk1qp5o1_500.gif", //gnumblr, fucking watermark.
-        "https://31.media.tumblr.com/74e968585193ae6cac00640f4ff874b0/tumblr_n06sbmaE8l1rioxyio1_500.gif", 
+        "http://31.media.tumblr.com/74e968585193ae6cac00640f4ff874b0/tumblr_n06sbmaE8l1rioxyio1_500.gif", 
         "http://i.minus.com/ibwFFM0DfsNhlk.gif", 
-
+        "http://media.giphy.com/media/wHA2VXVfKLPgc/giphy.gif",
+        "http://media.giphy.com/media/2qdNH3RSsKKRy/giphy.gif",
+        "http://media.giphy.com/media/13MfvSYW7ijaQo/giphy.gif",
+        "http://media.giphy.com/media/fD7C2jKqtWFDG/giphy.gif",
+        "http://media.giphy.com/media/PM8HiUsnKV9Qc/giphy.gif",
+        "http://media.giphy.com/media/ODy29v7YAJrck/giphy.gif",
+        "http://media.giphy.com/media/zrzbSZ9P8S9YA/giphy.gif",
+        "http://media.giphy.com/media/9JVKrIndpTTxK/giphy.gif",
+        "http://24.media.tumblr.com/01e5f39da5fdd54f0d0f65b9da21c231/tumblr_n08wjlRJyY1r9mp00o1_500.gif",
+        "http://31.media.tumblr.com/305ae1c68f6eab0f1b9d3023b2bbda20/tumblr_mzujezlInf1qfteu5o1_400.gif",
+        "http://media3.giphy.com/media/GJmFqmlVHuTdu/giphy.gif",
+        "https://24.media.tumblr.com/c382e4d3c96fe1674e14a4960360df72/tumblr_n0ma6iCbmj1six59bo1_400.gif",
+        "http://www.ultraimg.com/images/nbZxB.gif",
+        "https://24.media.tumblr.com/f78b3764eb32c28f7d861ec2ef1c5bc7/tumblr_n0ow01Kowv1rt67t1o1_400.gif",
+        "http://24.media.tumblr.com/1b98d854ba80a7abcb191b40d3148e57/tumblr_mzd37mxNSs1rpixm5o1_r1_500.gif",
+        "http://24.media.tumblr.com/d048a07cd885a076e8d21e7bbe77caae/tumblr_mzfuwgRFTP1rpixm5o1_400.gif",
+        "https://31.media.tumblr.com/ac2642c9c339fca6d8d2b5d7392b1ff5/tumblr_inline_n1imeeVGHd1sqyght.gif",
+        "https://24.media.tumblr.com/b8d8f03f808d758c1b09cbb1f16d8914/tumblr_n1d8boVT381qzhwpro1_500.gif",
+        "https://31.media.tumblr.com/48c85fbca065c2dbfd80ef3897a7f996/tumblr_n1krt6ftzv1r2geqjo1_500.gif",
       ];
 
       var OVERLAY_URLS = [
@@ -267,6 +308,21 @@
         "http://24.media.tumblr.com/e26e2f10a4399fa6402bef117ae6b3e6/tumblr_mpkl8sCbQs1s5jjtzo1_500.gif", //http://totallytransparent.tumblr.com/post/56912764887/totallytransparent-drawn-animated-by-totally
         "http://media.giphy.com/media/wR6ejCV1RlSTe/giphy.gif",
         "http://media.giphy.com/media/RanCH4FuWqimk/giphy.gif",
+        "http://25.media.tumblr.com/95c5ad5b6c6a3c0333a9e9ff00276488/tumblr_muz1lvG6uQ1s5jjtzo1_500.gif",
+        "http://media.giphy.com/media/7xvZMeEz4Im8U/giphy.gif",
+        "http://media.giphy.com/media/sA1lSYEzcXiWA/giphy.gif",
+        "http://media.giphy.com/media/57epfQ8l3YTTy/giphy.gif",
+        "http://media.giphy.com/media/UMOStVUKWlqbS/giphy.gif",
+        "http://media.giphy.com/media/6OvqkqF2Z1yUw/giphy.gif",
+        "http://media.giphy.com/media/QIzeueJB0Pf7a/giphy.gif",
+        "https://31.media.tumblr.com/b4de0649b73f74bc9e657adfd043477a/tumblr_n0wq4k2qSD1s5jjtzo1_500.png",
+        "http://31.media.tumblr.com/f6708b8862d823c1b7ede488f1ddd017/tumblr_n1oep7wKEs1s5jjtzo1_500.gif",
+        "http://25.media.tumblr.com/b5311c15b4d77aff53bc04a66ce41382/tumblr_n1gxibBinr1s5jjtzo1_r1_500.gif",
+        "http://25.media.tumblr.com/cbd21fd6b98ecdea9c34ed36f7aaa6e7/tumblr_n0e04xDorI1s5jjtzo1_500.gif",
+        "http://cdn.gifbay.com/2013/08/cool_transparent_gifs_2-76960.gif",
+        "http://26.media.tumblr.com/tumblr_m3245olhHC1rrfi85o1_500.gif",
+        "http://media.tumblr.com/4351cd80db936533cbe799a467fcfd8e/tumblr_inline_mq1npynqyv1qz4rgp.gif",
+        "http://pixabay.com/static/uploads/photo/2013/07/12/11/57/cloud-144983_640.png",
 
       ]
 
@@ -576,6 +632,7 @@
   <body onload="init();" onkeydown=keystroke(event) onmousemove=mousemove(event)>
     <div class="full" id="rawr" ></div>
     <div class="full hidable" id="overlay" ></div>
+    <div class="full" id="static_overlay" ></div>
     <div id="container">
       <div id="controls" class="initially_hidden">
         <div class="input-group">
