@@ -1,0 +1,55 @@
+#container{
+	height: 50%;
+	width: 33%;
+	left: 0px;
+	top: 0px;
+	z-index: 100;
+	position: absolute;
+}
+
+#overlay{
+	background-image: url('http://24.media.tumblr.com/f2c3cb58e5df9b083bb4db24bf7f065a/tumblr_mney5aJkmu1s5jjtzo1_r1_500.gif');
+	z-index: 10;
+	position: absolute;
+	background-size: 100% 100%;
+}
+
+#rawr{
+	z-index: 0;
+	position: absolute;
+	background-image: url('http://upload.wikimedia.org/wikipedia/commons/4/42/Loading.gif'); 
+	background-color: black;
+}
+
+.initially_hidden{
+	display: none;
+}
+
+body, html{
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+.hidable {
+	display: none;
+}
+
+.hover{
+	display: inline;
+}
+
+.full{
+	width: 100%;
+	height: 100%;
+	margin : 0;
+}
+
+#full_overlay {
+	-webkit-filter: blur(20px);
+	-moz-filter: blur(20px);
+	-o-filter: blur(20px);
+	-ms-filter: blur(20px);
+	filter: blur(20px);
+	opacity: 0.4;
+}
