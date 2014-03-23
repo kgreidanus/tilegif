@@ -182,3 +182,30 @@ function moveit() {
     }, dt);
   }
 }
+
+function toggleoverlay() {
+  toggle_visibility("overlay");
+}
+
+function togglecontrols() {
+  toggle_visibility("controls")
+}
+
+function stopmovingit() {
+  clearInterval(translate_interval);
+  moving = false;
+  translate_interval = null;
+}
+
+function trackit() {
+  tracking = !tracking;
+}
+
+function toggle_visibility(id, set_vis) {
+   var e = document.getElementById(id);
+   var display = window.getComputedStyle(e).display
+   if( (display == 'block' && set_vis != "show") || set_vis == "hide" )
+      e.style.display = 'none';
+   else
+      e.style.display = 'block';
+}
