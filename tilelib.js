@@ -209,3 +209,11 @@ function toggle_visibility(id, set_vis) {
    else
       e.style.display = 'block';
 }
+
+function mousemove(e){
+  if (tracking){
+    y = e.y;
+    x = e.x;
+    drawxy();
+  }
+}

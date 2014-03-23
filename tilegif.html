@@ -12,6 +12,8 @@
     <script src="tilelib.js"></script>
     <script src="lists.js"></script>
     
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="tilegif.css">
     
     <script>
@@ -129,9 +131,6 @@
         }
       }
     </script>
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
     <script>
       var DEFAULT_PERCENT = 25;
       var PERCENT_STEP = 0.1;
@@ -195,58 +194,6 @@
 
     </script>
 
-    <script>
-      var key_function_mappings = {
-
-        "M" : moveit,
-        "S" : stopmovingit,
-        "T" : trackit,
-        "N" : next_gif,
-        "P" : prev_gif,
-        "H" : horiz,
-        "V" : verti,
-        "F" : full,
-        "0" : nozoom,
-        "O" : toggleoverlay,
-        "C" : togglecontrols,
-        "R" : random_gif,
-        "%" : function() { dx -= ACCELERATION_INCREMENT; drawxy(); }, // left arrow
-        "'" : function() { dx += ACCELERATION_INCREMENT; drawxy(); }, // right arrow
-        "(" : function() { dy += ACCELERATION_INCREMENT; drawxy(); }, // up arrow
-        "&" : function() { dy -= ACCELERATION_INCREMENT; drawxy(); }, // down arrow
-        187 : plus,  // This is stupid. (-)
-        189 : minus, // This is stupid. (=)
-        219 : prev_overlay, // This is stupid. ([)
-        221 : next_overlay, // This is stupid. (])
-      };
-
-      function keystroke(e){
-        if (document.activeElement == document.getElementById("gifarea")){
-          return;
-        }
-
-        if (document.activeElement == document.getElementById("overlayarea")){
-          return;
-        }
-
-        // High ascii is being all shitty so this tries to look up codes if it can't find the character.
-        keyChar = String.fromCharCode(e.keyCode);
-        if ( key_function_mappings.hasOwnProperty(keyChar) ){
-          key_function_mappings[keyChar]();
-        } else if (key_function_mappings.hasOwnProperty(e.keyCode)) {
-          key_function_mappings[e.keyCode]();
-        }
-      }
-
-      function mousemove(e){
-        if (tracking){
-          y = e.y;
-          x = e.x; 
-          drawxy();
-        }
-      }
-
-    </script>
   </head>
 
   <body onload="init();" onkeydown=keystroke(event) onmousemove=mousemove(event)>
