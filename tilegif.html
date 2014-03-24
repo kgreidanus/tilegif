@@ -194,10 +194,19 @@
       }
 
     </script>
+    <script>
+    <!--
+    function remote(){
+    win2=window.open("remote.html","","width=150,height=350,scrollbars")
+    win2.creator=self
+    }
+    //-->
+    </script>
 
   </head>
 
   <body onload="init();" onkeydown=keystroke(event) onmousemove=mousemove(event)>
+
     <div class="full" id="rawr" ></div>
     <div class="full hidable" id="overlay" ></div>
     <div class="full" id="static_overlay" ></div>
@@ -248,6 +257,10 @@
         <button id="trackit" onclick="trackit()">Toggle Mouse Tracking (T)</button>
         <br>
         <button id="showhidecontrols" onclick="togglecontrols()">Hide Controls (C)</button>
+        
+    <form>
+    <input type="button" value="Launch remote!" onClick="remote()">
+    </form>
         </div>
       </div>
   </body>

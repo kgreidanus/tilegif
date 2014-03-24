@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>Remote Control</title>
+<script>
+<!--
+function remote2(url){
+window.opener.location=url
+}
+//-->
+</script>
+</head>
+
+<body>
+	    <div id="container">
+      <div id="controls" class="initially_hidden">
+        <div class="input-group">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default" onclick="window.opener.remove_gif()">X</button>
+          </div>
+          <span class="input-group-addon">GIFS</span>
+          <span class="input-group-addon"><span id="gif_index_display">0</span> / <span id="gif_index_max_display">0</span></span>
+          <input type="text" class="form-control" id="gifarea" onchange="setManualGif()" placeholder="GIF URL">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default" onclick="window.opener.prev_gif()">-</button>
+            <button type="button" class="btn btn-default" onclick="window.opener.next_gif()">+</button>
+            <button type="button" class="btn btn-default" onclick="window.opener.random_gif()">R</button>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default" onclick="window.opener.remove_overlay()">X</button>
+          </div>
+          <span class="input-group-addon">
+
+            <input type="checkbox" onclick="window.opener.toggleoverlay()" >
+            OVERLAYS
+          </span>
+          <span class="input-group-addon"><span id="overlay_index_display">0</span> / <span id="overlay_index_max_display">0</span></span>
+          <input type="text" class="form-control" id="overlayarea" onchange="setManualOverlay()" onTextEntered="setManualOverlay()" placeholder="OVERLAY URL">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default" onclick="window.opener.prev_overlay()">-</button>
+            <button type="button" class="btn btn-default" onclick="window.opener.next_overlay()">+</button>
+            <button type="button" class="btn btn-default" onclick="window.opener.random_overlay()">R</button>
+          </div>
+        </div>
+        <button id="minus" onclick="window.opener.minus()">Zoom out (-)</button>
+        <button id="plus" onclick="window.opener.plus()">Zoom in (+)</button>
+        <button id="nozoom" onclick="window.opener.nozoom()">No Zoom (0)</button>
+        <br>
+        <button id="horiz" onclick="window.opener.horiz()">Horz (H)</button>
+        <button id="verti" onclick="window.opener.verti()">Vert (V)</button>
+        <button id="full" onclick="window.opener.full()">Full (F)</button>
+        <br>
+        <button id="moveit" onclick="window.opener.moveit()">Move It (M)</button>
+        <button id="stopit" onclick="window.opener.stopmovingit()">Stop it (S)</button>
+        <br>
+        <button id="trackit" onclick="window.opener.trackit()">Toggle Mouse Tracking (T)</button>
+        <br>
+        <button id="showhidecontrols" onclick="window.opener.togglecontrols()">Hide Controls (C)</button>
+        
+    <form>
+    <input type="button" value="Launch remote!" onClick="remote()">
+    </form>
+        </div>
+</body>
+
+</html>
