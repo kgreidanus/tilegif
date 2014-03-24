@@ -187,11 +187,12 @@
           [toggleoverlay, 0],
           [toggleoverlay, 1],
           [random_overlay, 1],
-        ]
+        ];
+
 
         var timing_states = 3;
+        var j = random_bumps % timing_states;
 
-        for (var j = 0; j<=timing_states; j++){
           for (var i = 0; i<=action_tuples.length-1; i++){
             var fun = action_tuples[i][0];
             var timing = action_tuples[i][1];
@@ -200,15 +201,16 @@
               fun();
             }
           }
-        }
         random_bumps++;
       }
 
-      console.log("wtf");
-      if (QueryString.demo){
+      function demo_shit(){
         console.log("DEMO MODE");
-        window.setInterval(random_bump, 4000);
+        random_gif();
+        random_overlay();
+        toggleoverlay(); // To set it to on initially.
 
+        window.setInterval(random_bump, 2900);
       }
 
       function init() {
@@ -227,6 +229,9 @@
           toggle_visibility("controls", "hide");
         };
 
+        if (QueryString.demo){
+          demo_shit();
+        }
       }
 
     </script>
