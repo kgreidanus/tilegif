@@ -133,6 +133,10 @@
       }
     </script>
     <script>
+
+      function tile_controller(){
+
+      }
       var DEFAULT_PERCENT = 25;
       var PERCENT_STEP = 0.1;
 
@@ -159,6 +163,8 @@
 
       var tracking;
 
+      var remote_control = 0;
+
       var gif_index = 0;
       var overlay_index = 0;
 
@@ -174,6 +180,35 @@
       var hpercent = DEFAULT_PERCENT;
       var vpercent = DEFAULT_PERCENT;
 
+      random_bumps = 0;
+      function random_bump(){
+        var action_tuples = [
+          [random_gif, 2],
+          [toggleoverlay, 0],
+          [toggleoverlay, 1],
+          [random_overlay, 1],
+        ]
+
+        var timing_states = 3;
+
+        for (var j = 0; j<=timing_states; j++){
+          for (var i = 0; i<=action_tuples.length-1; i++){
+            var fun = action_tuples[i][0];
+            var timing = action_tuples[i][1];
+
+            if (timing == j){
+              fun();
+            }
+          }
+        }
+      }
+
+      console.log("wtf");
+      if (QueryString.demo){
+        console.log("DEMO MODE");
+        window.setInterval(random_bump, 4000);
+
+      }
 
       function init() {
         container = document.getElementById("container");
@@ -197,8 +232,17 @@
     <script>
     <!--
     function remote(){
-    win2=window.open("remote.html","","width=150,height=350,scrollbars")
-    win2.creator=self
+      if (remote_control){
+        return;
+      }   
+
+      win2=window.open("remote.html","","width=600,height=600,scrollbars");
+      win2.controller=self;
+      win2.onbeforeunload = function(){
+        win2.controller.remote_control = 0;
+        win2.controller.console.log("remote control closed.");
+      }
+
     }
     //-->
     </script>
@@ -257,7 +301,7 @@
         <button id="trackit" onclick="trackit()">Toggle Mouse Tracking (T)</button>
         <br>
         <button id="showhidecontrols" onclick="togglecontrols()">Hide Controls (C)</button>
-        
+
     <form>
     <input type="button" value="Launch remote!" onClick="remote()">
     </form>
