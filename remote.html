@@ -1,0 +1,61 @@
+<html>
+<head>
+
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="tilegif.css">
+<title>Remote Control</title>
+
+</head>
+
+<body onkeydown=window.controller.keystroke(event)>
+	    <div id="container">
+      <div id="controls" >
+        <div class="input-group">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default" onclick="window.controller.remove_gif()">X</button>
+          </div>
+          <span class="input-group-addon">GIFS</span>
+          <span class="input-group-addon"><span id="gif_index_display">0</span> / <span id="gif_index_max_display">0</span></span>
+          <input type="text" class="form-control" id="gifarea" onchange="setManualGif()" placeholder="GIF URL">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default" onclick="window.controller.prev_gif()">-</button>
+            <button type="button" class="btn btn-default" onclick="window.controller.next_gif()">+</button>
+            <button type="button" class="btn btn-default" onclick="window.controller.random_gif()">R</button>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default" onclick="window.controller.remove_overlay()">X</button>
+          </div>
+          <span class="input-group-addon">
+
+            <input type="checkbox" onclick="window.controller.toggleoverlay()" >
+            OVERLAYS
+          </span>
+          <span class="input-group-addon"><span id="overlay_index_display">0</span> / <span id="overlay_index_max_display">0</span></span>
+          <input type="text" class="form-control" id="overlayarea" onchange="setManualOverlay()" onTextEntered="setManualOverlay()" placeholder="OVERLAY URL">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default" onclick="window.controller.prev_overlay()">-</button>
+            <button type="button" class="btn btn-default" onclick="window.controller.next_overlay()">+</button>
+            <button type="button" class="btn btn-default" onclick="window.controller.random_overlay()">R</button>
+          </div>
+        </div>
+        <button id="minus" onclick="window.controller.minus()">Zoom out (-)</button>
+        <button id="plus" onclick="window.controller.plus()">Zoom in (+)</button>
+        <button id="nozoom" onclick="window.controller.nozoom()">No Zoom (0)</button>
+        <br>
+        <button id="horiz" onclick="window.controller.horiz()">Horz (H)</button>
+        <button id="verti" onclick="window.controller.verti()">Vert (V)</button>
+        <button id="full" onclick="window.controller.full()">Full (F)</button>
+        <br>
+        <button id="moveit" onclick="window.controller.moveit()">Move It (M)</button>
+        <button id="stopit" onclick="window.controller.stopmovingit()">Stop it (S)</button>
+        <br>
+        <button id="trackit" onclick="window.controller.trackit()">Toggle Mouse Tracking (T)</button>
+        <br>
+        <button id="showhidecontrols" onclick="window.controller.togglecontrols()">Hide Controls (C)</button>
+        </div>
+</body>
+
+</html>

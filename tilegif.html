@@ -11,6 +11,7 @@
 
     <script src="tilelib.js"></script>
     <script src="lists.js"></script>
+    <script src="tilekeys.js"></script>
     
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
@@ -132,6 +133,10 @@
       }
     </script>
     <script>
+
+      function tile_controller(){
+
+      }
       var DEFAULT_PERCENT = 25;
       var PERCENT_STEP = 0.1;
 
@@ -158,6 +163,8 @@
 
       var tracking;
 
+      var remote_control = 0;
+
       var gif_index = 0;
       var overlay_index = 0;
 
@@ -173,6 +180,38 @@
       var hpercent = DEFAULT_PERCENT;
       var vpercent = DEFAULT_PERCENT;
 
+      random_bumps = 0;
+      function random_bump(){
+        var action_tuples = [
+          [random_gif, 2],
+          [toggleoverlay, 0],
+          [toggleoverlay, 1],
+          [random_overlay, 1],
+        ];
+
+
+        var timing_states = 3;
+        var j = random_bumps % timing_states;
+
+          for (var i = 0; i<=action_tuples.length-1; i++){
+            var fun = action_tuples[i][0];
+            var timing = action_tuples[i][1];
+
+            if (timing == j){
+              fun();
+            }
+          }
+        random_bumps++;
+      }
+
+      function demo_shit(){
+        console.log("DEMO MODE");
+        random_gif();
+        random_overlay();
+        toggleoverlay(); // To set it to on initially.
+
+        window.setInterval(random_bump, 2900);
+      }
 
       function init() {
         container = document.getElementById("container");
@@ -190,13 +229,34 @@
           toggle_visibility("controls", "hide");
         };
 
+        if (QueryString.demo){
+          demo_shit();
+        }
       }
 
+    </script>
+    <script>
+    <!--
+    function remote(){
+      if (remote_control){
+        return;
+      }   
+
+      win2=window.open("remote.html","","width=600,height=600,scrollbars");
+      win2.controller=self;
+      win2.onbeforeunload = function(){
+        win2.controller.remote_control = 0;
+        win2.controller.console.log("remote control closed.");
+      }
+
+    }
+    //-->
     </script>
 
   </head>
 
   <body onload="init();" onkeydown=keystroke(event) onmousemove=mousemove(event)>
+
     <div class="full" id="rawr" ></div>
     <div class="full hidable" id="overlay" ></div>
     <div class="full" id="static_overlay" ></div>
@@ -247,6 +307,10 @@
         <button id="trackit" onclick="trackit()">Toggle Mouse Tracking (T)</button>
         <br>
         <button id="showhidecontrols" onclick="togglecontrols()">Hide Controls (C)</button>
+
+    <form>
+    <input type="button" value="Launch remote!" onClick="remote()">
+    </form>
         </div>
       </div>
   </body>
