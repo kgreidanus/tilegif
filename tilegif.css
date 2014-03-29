@@ -17,8 +17,11 @@
 #rawr{
 	z-index: 0;
 	position: absolute;
+
 	background-image: url('http://upload.wikimedia.org/wikipedia/commons/4/42/Loading.gif'); 
 	background-color: black;
+
+	-webkit-filter: hue-rotate(0deg);
 }
 
 .initially_hidden{

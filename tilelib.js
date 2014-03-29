@@ -191,7 +191,7 @@ function drawxy() {
 
 function draw(_x,_y) {
     rawr.style.backgroundPositionY = _y+"px";
-    rawr.style.backgroundPositionX = _x+"px";      
+    rawr.style.backgroundPositionX = _x+"px";
 }
 
 //action -- sort of
@@ -237,6 +237,47 @@ function toggle_visibility(id, set_vis) {
       e.style.display = 'none';
    else
       e.style.display = 'block';
+}
+
+var hue = 0;
+function rotate_hue(id, deg) {
+    hue = hue + deg;
+    
+
+    e = document.getElementById(id);
+
+    rawr.style.webkitFilter = "hue-rotate("+hue+"deg)";
+
+    //e.setAttribute("style","-webkit-filter:hue-rotate(" +  + "deg); "+e.style.backgroundImage+" ;");
+
+}
+
+var blur = 0;
+var state = "asc";;
+function shift_blur(id, px){
+  px = Math.abs(px);
+  MAX = 5;
+
+  if (state == "asc"){
+    if (blur >= MAX){
+      state = "desc";
+      blur -= px;
+    } else {
+      blur += px;
+    }
+  } else if(state == "desc"){
+    if (blur <= 0){
+      state = "asc";
+      blur += px;
+    } else {
+      blur -= px;
+    }
+  }
+
+
+  e = document.getElementById(id);
+
+  rawr.style.webkitFilter = "blur("+blur+"px)";
 }
 
 function mousemove(e){

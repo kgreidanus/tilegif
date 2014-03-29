@@ -204,6 +204,8 @@
         random_bumps++;
       }
 
+
+
       function demo_shit(){
         console.log("DEMO MODE");
         random_gif();
@@ -211,7 +213,25 @@
         toggleoverlay(); // To set it to on initially.
 
         window.setInterval(random_bump, 2900);
+
       }
+
+
+      hue_interval = null;
+      function hue_shit() {
+        console.log("rotating hue...");
+        var HUE_STEP = 10;
+        var HUE_STEP_FREQUENCY = 120;
+        hue_interval = window.setInterval(function(){rotate_hue("rawr", HUE_STEP)}, HUE_STEP_FREQUENCY);
+      }
+
+      blur_interval = null;
+      function blur_shit() {
+        console.log("blurring...");
+        var BLUR_STEP = 1.2;
+        var BLUR_FREQUENCY = 150;
+        blur_interval = window.setInterval(function(){shift_blur("rawr", BLUR_STEP)}, BLUR_FREQUENCY);
+      }   
 
       function init() {
         container = document.getElementById("container");
@@ -231,6 +251,14 @@
 
         if (QueryString.demo){
           demo_shit();
+        }
+
+        if (QueryString.hue_demo){
+          hue_shit();
+        }
+
+        if (QueryString.blur_demo){
+          blur_shit();
         }
       }
 
