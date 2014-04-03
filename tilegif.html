@@ -204,8 +204,6 @@
         random_bumps++;
       }
 
-
-
       function demo_shit(){
         console.log("DEMO MODE");
         random_gif();
@@ -259,6 +257,21 @@
 
         if (QueryString.blur_demo){
           blur_shit();
+        }
+
+        if (QueryString.random_start){
+          random_gif();
+          random_overlay();
+          Math.random() < 0.5 ? toggleoverlay() : null;
+          Math.random() < 0.5 ? moveit() : null;
+        }
+
+        if (QueryString.load_url){
+          setGifFromURL(QueryString.load_url)
+        }
+
+        if (QueryString.full){
+          full();
         }
       }
 

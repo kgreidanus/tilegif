@@ -29,7 +29,10 @@ function remove_overlay() {
 
 function setManualGif() {
   url = gifarea.value;
-  
+  setGifFromURL(url);
+}
+
+function setGifFromURL(url) {
   GIF_URLS.push(url);
   gif_index = GIF_URLS.length-1;
 
