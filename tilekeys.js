@@ -12,6 +12,20 @@
         "O" : toggleoverlay,
         "C" : togglecontrols,
         "R" : random_gif,
+        "D" : function() { 
+          if (demo_mode){
+            if (demo_paused){
+              demo_paused = 0;  
+              console.log("demo paused");
+              
+            } else {
+              demo_paused = 1;
+              console.log("demo unpaused");
+            }
+          } else {
+            demo_shit();
+          }
+        },
         "%" : function() { dx -= ACCELERATION_INCREMENT; drawxy(); }, // left arrow
         "'" : function() { dx += ACCELERATION_INCREMENT; drawxy(); }, // right arrow
         "(" : function() { dy += ACCELERATION_INCREMENT; drawxy(); }, // up arrow

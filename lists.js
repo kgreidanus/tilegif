@@ -88,6 +88,8 @@ var GIF_URLS = [
     "http://25.media.tumblr.com/tumblr_m9hjukpVet1qgyb21o1_500.gif",
     "http://i.imgur.com/AUXb2N9.gif",
     "http://31.media.tumblr.com/097eb333ccfde5bd5dbc7e7f4c32cb23/tumblr_n2bzlwPXAq1tq1bhgo1_400.gif",
+    "https://31.media.tumblr.com/1e45c8e771ab9f5d1cfda15360d630f6/tumblr_n3dobmzSXX1trzml2o1_250.gif",
+    "https://24.media.tumblr.com/9e5ca023ed40dc89709019e6079d977c/tumblr_n34d366ETO1s4fz4bo1_500.gif",
 ];
 
 var OVERLAY_URLS = [
@@ -130,6 +132,6 @@ var OVERLAY_URLS = [
     "http://cdn.gifbay.com/2013/08/cool_transparent_gifs_2-76960.gif",
     "http://26.media.tumblr.com/tumblr_m3245olhHC1rrfi85o1_500.gif",
     "http://media.tumblr.com/4351cd80db936533cbe799a467fcfd8e/tumblr_inline_mq1npynqyv1qz4rgp.gif",
-    "http://pixabay.com/static/uploads/photo/2013/07/12/11/57/cloud-144983_640.png",
     "http://i.imgur.com/xuq29.gif",
+    "https://24.media.tumblr.com/485c7bfa78e47e91f2b19e555c5c9319/tumblr_n3dk9uwjgz1rznvc3o1_500.gif",
 ];

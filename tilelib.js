@@ -259,7 +259,7 @@ var blur = 0;
 var state = "asc";;
 function shift_blur(id, px){
   px = Math.abs(px);
-  MAX = 5;
+  MAX = 6;
 
   if (state == "asc"){
     if (blur >= MAX){

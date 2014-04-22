@@ -168,6 +168,9 @@
       var gif_index = 0;
       var overlay_index = 0;
 
+      var demo_mode = 0;
+      var demo_paused = 1;
+
       var gif_index_min = 0;
       var gif_index_max = GIF_URLS.length-1;
 
@@ -180,8 +183,12 @@
       var hpercent = DEFAULT_PERCENT;
       var vpercent = DEFAULT_PERCENT;
 
-      random_bumps = 0;
-      function random_bump(){
+      demo_bumps = 0;
+      function demo_bump(){
+        if (demo_paused){
+          return;
+        }
+
         var action_tuples = [
           [random_gif, 2],
           [toggleoverlay, 0],
@@ -191,7 +198,7 @@
 
 
         var timing_states = 3;
-        var j = random_bumps % timing_states;
+        var j = demo_bumps % timing_states;
 
           for (var i = 0; i<=action_tuples.length-1; i++){
             var fun = action_tuples[i][0];
@@ -201,17 +208,24 @@
               fun();
             }
           }
-        random_bumps++;
+        demo_bumps++;
       }
 
       function demo_shit(){
         console.log("DEMO MODE");
+        demo_mode = 1;
+        demo_paused = 0;
         random_gif();
         random_overlay();
         toggleoverlay(); // To set it to on initially.
 
-        window.setInterval(random_bump, 2900);
+        set_return_demo_interval();
 
+      }
+
+      function set_return_demo_interval(){
+        console.log("interval set");
+        return window.setInterval(demo_bump, 2300);
       }
 
 
@@ -226,8 +240,8 @@
       blur_interval = null;
       function blur_shit() {
         console.log("blurring...");
-        var BLUR_STEP = 1.2;
-        var BLUR_FREQUENCY = 150;
+        var BLUR_STEP = 0.8;
+        var BLUR_FREQUENCY = 200;
         blur_interval = window.setInterval(function(){shift_blur("rawr", BLUR_STEP)}, BLUR_FREQUENCY);
       }   
 
